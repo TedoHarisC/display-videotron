@@ -9,7 +9,7 @@ Don't miss out on the opportunity to take your data presentation to the next lev
 
 -----
 
-Equipped with a feature to change light and dark themes make it look's perfect
+Equipped with a feature to change light and dark themes it look's perfect
 
 
 ## Author(s)
