@@ -90,7 +90,7 @@
     </style>
 </head>
 
-<body class="d-flex h-100 text-center text-bg-dark">
+<body id="body_content" class="d-flex h-100 text-center text-bg-dark">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -114,15 +114,15 @@
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
             aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-            <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                <use href="#circle-half"></use>
-            </svg>
+
+            <!-- Diisi lewat kode program untuk icon nya -->
+
             <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
             <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                    aria-pressed="false">
+                <button id="btn_theme_light" type="button" class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="light" aria-pressed="true" onclick="setTheme('light')">
                     <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
                         <use href="#sun-fill"></use>
                     </svg>
@@ -133,8 +133,8 @@
                 </button>
             </li>
             <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                    aria-pressed="false">
+                <button id="btn_theme_dark" type="button" class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="dark" aria-pressed="true" onclick="setTheme('dark')">
                     <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
                         <use href="#moon-stars-fill"></use>
                     </svg>
@@ -145,8 +145,8 @@
                 </button>
             </li>
             <li>
-                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-                    aria-pressed="true">
+                <button id="btn_theme_auto" type="button" class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto" aria-pressed="true" onclick="setTheme('auto')">
                     <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
                         <use href="#circle-half"></use>
                     </svg>
@@ -244,9 +244,48 @@
         $("#spn_date_now").html(output);
     }
 
+    function setTheme(value) {
+        if (value == "light") {
+            $("#btn_theme_light").addClass('active');
+            $("#btn_theme_dark").removeClass('active');
+            $("#btn_theme_auto").removeClass('active');
+
+            $("#body_content").removeClass('text-bg-dark');
+            $("#bd-theme").html('');
+            $("#bd-theme").append('<svg id="default_icon" class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>');
+
+            $("header").css('background-color', '#77B7F7');
+            $("footer").css('background-color', '#77B7F7');
+        } else if (value == "dark") {
+            $("#btn_theme_light").removeClass('active');
+            $("#btn_theme_dark").addClass('active');
+            $("#btn_theme_auto").removeClass('active');
+
+            $("#body_content").addClass('text-bg-dark');
+            $("#bd-theme").html('');
+            $("#bd-theme").append('<svg id="default_icon" class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>');
+
+            $("header").css('background-color', '#637A91');
+            $("footer").css('background-color', '#637A91');
+        } else {
+            $("#btn_theme_light").removeClass('active');
+            $("#btn_theme_dark").removeClass('active');
+            $("#btn_theme_auto").addClass('active');
+
+            $("#body_content").addClass('text-bg-dark');
+            $("#bd-theme").html('');
+            $("#bd-theme").append('<svg id="default_icon" class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>');
+
+            $("header").css('background-color', '#637A91');
+            $("footer").css('background-color', '#637A91');
+        }
+    }
+
 
     $(document).ready(function () {
         showDateNow();
+        $("#bd-theme").append('<svg id="default_icon" class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>');
+
     });
 </script>
 
